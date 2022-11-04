@@ -14,9 +14,10 @@ class CalcScenarioAPIView(APIView):
         if request.user.is_anonymous:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+        #getting query params or is_public
         public = request.query_params.get('public')
-        print(public)
         # res_status = status.HTTP_400_BAD_REQUEST
+        
         if(public==False or public==None):
             #users' records
             obj = CalcScenario.objects.filter(user = request.user)
@@ -24,9 +25,9 @@ class CalcScenarioAPIView(APIView):
             #user's records or public records
             obj = CalcScenario.objects.filter(Q(user = request.user) | Q(is_public =True))
         
-        
         serializer = CalcScenarioSerializer(obj, many=True)
-        return Response(serializer.data)
+
+        return Response(serializer.data, status=status.HTTP_404_NOT_FOUND)
 
 class CalcScenarioSlugAPIView(APIView):
     pass
