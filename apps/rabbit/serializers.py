@@ -7,3 +7,16 @@ class CalcScenarioSerializer(serializers.ModelSerializer):
         fields = ('id', 'slug', 'name', 'user')
 
 
+class CalcScenarioSlugSerializer(serializers.ModelSerializer):
+    result = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CalcScenario
+        fields = ('id','slug', 'name', 'user', 'result')
+    
+    @staticmethod
+    def get_result(obj):
+        # result = obj.func_trial()
+        result = obj.enumerate_scenarios()
+        print("result:",result)
+        return result

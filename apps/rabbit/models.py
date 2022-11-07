@@ -52,6 +52,9 @@ class CalcScenario(CoreModel):
                 c_dict["scenario"] = self
                 c_dict[k] = i
                 self.objects.update_or_create(**c_dict)
+    
+    def func_trial(self):
+        return("Class Func")
 
     def enumerate_scenarios(self):
         custom_paramset = self.params.all()
