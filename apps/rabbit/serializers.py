@@ -16,7 +16,6 @@ class CalcScenarioSlugSerializer(serializers.ModelSerializer):
     
     @staticmethod
     def get_result(obj):
-        # result = obj.func_trial()
-        result = obj.enumerate_scenarios()
-        print("result:",result)
+        result = obj.func_trial()
+        # result = obj.enumerate_scenarios()
         return result
